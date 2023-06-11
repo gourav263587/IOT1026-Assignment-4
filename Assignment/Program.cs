@@ -1,4 +1,4 @@
-namespace Assignment.InterfaceCommand 
+namespace Assignment.InterfaceCommand
 {
     public class RobotTester
     {
@@ -6,13 +6,13 @@ namespace Assignment.InterfaceCommand
         {
             Robot robot = new Robot();
 
-            Console.WriteLine("Enter command strings (separated by commas):");
-            string input = Console.ReadLine();
+            Console.WriteLine("Enter command in form of string and seperate with comma or ,:");
+            string userinput = Console.ReadLine();
 
-            string[] commandStrings = input.Split(',');
+            string[] commandStrings = userinput.Split(',');
             foreach (string commandString in commandStrings)
             {
-                IRobotCommand command = CreateCommand(commandString);
+                IRobotCommand command = GetCommand(commandString);
                 if (command != null)
                 {
                     robot.LoadCommand(command);
@@ -26,7 +26,7 @@ namespace Assignment.InterfaceCommand
             robot.Run();
         }
 
-         private IRobotCommand CreateCommand(string commandString)
+         private IRobotCommand GetCommand(string commandString)
          {
             commandString = commandString.Trim().ToLower();
 
@@ -64,6 +64,6 @@ namespace Assignment.InterfaceCommand
             Console.WriteLine("west");
             RobotTester tester = new RobotTester();
             tester.Run();
-        }
-    }
+        }
+    }
 }
