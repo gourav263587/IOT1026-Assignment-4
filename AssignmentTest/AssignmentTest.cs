@@ -1,13 +1,14 @@
-﻿using Assignment;
-using Assignment.AbstractCommand; // Change to Assignment.InterfaceCommand when rdy
+using Assignment;
+using Assignment.InterfaceCommand; // Change to Assignment.InterfaceCommand when rdy
 
-namespace AssignmentTest
+namespace AssignmentTest    
 {
     [TestClass]
     public class AssignmentTests
     {
+       
         [TestMethod]
-        public void PropertiesTest()
+        public void GetCommand_PropertiesTest()
         {
             Robot robot1 = new();
             Assert.AreEqual(robot1.NumCommands, 6);
@@ -28,6 +29,97 @@ namespace AssignmentTest
             Assert.AreEqual(robot1.Y, 0);
             robot1.Y = -5;
             Assert.AreEqual(robot1.Y, -5);
+        }
+
+        [TestMethod]
+        public void OnCommand_Test()
+        {
+            Robot testRobot = new Robot();
+            Assert.AreEqual(testRobot.IsPowered, false);
+            testRobot.LoadCommand(new OnCommand());
+            testRobot.Run();
+            Assert.AreEqual(testRobot.IsPowered, true);
+            // Robot executes the OnCommand again (memory isn't cleared between runs)
+            testRobot.Run();
+            // Verifies if a turned on Robot is turned on again, it stays powered on
+            Assert.AreEqual(testRobot.IsPowered, true);
+        }
+
+        [TestMethod]
+        public void OffCommand_Test()
+        {
+            Robot testRobot = new();
+            Assert.AreEqual(testRobot.IsPowered, false);
+            testRobot.IsPowered = true;
+            testRobot.LoadCommand(new OffCommand());
+            testRobot.Run();
+            Assert.AreEqual(testRobot.IsPowered, false);
+            testRobot.Run();
+            Assert.AreEqual(testRobot.IsPowered, false);
+        }
+
+        [TestMethod]
+        public void WestCommand_Test()
+        {
+            Robot testRobot = new Robot();
+            Assert.AreEqual(testRobot.X, 0);
+            testRobot.LoadCommand(new WestCommand());
+            testRobot.Run();
+            // Robot is powered off by default
+            Assert.AreEqual(testRobot.X, 0); // Robot should not move if it isn't turned on
+            testRobot.IsPowered = true;
+            testRobot.Run();
+            Assert.AreEqual(testRobot.X, -1);
+            testRobot.Run();
+            Assert.AreEqual(testRobot.X, -2);
+        }
+
+        [TestMethod]
+        public void NorthCommand_Test()
+        {
+            Robot testRobot = new Robot();
+            Assert.AreEqual(testRobot.Y, 0);
+            testRobot.LoadCommand(new NorthCommand());
+            testRobot.Run();
+            // Robot is powered off by default
+            Assert.AreEqual(testRobot.Y, 0); // Robot should not move if it isn't turned on
+            testRobot.IsPowered = true;
+            testRobot.Run();
+            Assert.AreEqual(testRobot.Y, 1);
+            testRobot.Run();
+            Assert.AreEqual(testRobot.Y, 2);
+        }
+
+        [TestMethod]
+        public void SouthCommand_Test()
+        {
+            Robot testRobot = new Robot();
+            Assert.AreEqual(testRobot.Y, 0);
+            testRobot.LoadCommand(new SouthCommand());
+            testRobot.Run();
+            // Robot is powered off by default
+            Assert.AreEqual(testRobot.Y, 0); // Robot should not move if it isn't turned on
+            testRobot.IsPowered = true;
+            testRobot.Run();
+            Assert.AreEqual(testRobot.Y, -1);
+            testRobot.Run();
+            Assert.AreEqual(testRobot.Y, -2);
+        }
+
+        [TestMethod]
+        public void EastCommand_Test()
+        {
+            Robot testRobot = new Robot();
+            Assert.AreEqual(testRobot.X, 0);
+            testRobot.LoadCommand(new EastCommand());
+            testRobot.Run();
+            // Robot is powered off by default
+            Assert.AreEqual(testRobot.X, 0); // Robot should not move if it isn't turned on
+            testRobot.IsPowered = true;
+            testRobot.Run();
+            Assert.AreEqual(testRobot.X, 1);
+            testRobot.Run();
+            Assert.AreEqual(testRobot.X, 2);
         }
     }
 }
