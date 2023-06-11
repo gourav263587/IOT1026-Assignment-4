@@ -31,7 +31,7 @@ the main pmethod of program class shows possible commands to user and then creat
         
 
 
-        ![WhatsApp Image 2023-06-10 at 10 05 24 PM](https://github.com/gourav263587/IOT1026-Assignment-4/assets/133707861/291d2611-c23a-456e-8e9d-3f35037d99cf)
+![WhatsApp Image 2023-06-10 at 10 05 24 PM](https://github.com/gourav263587/IOT1026-Assignment-4/assets/133707861/291d2611-c23a-456e-8e9d-3f35037d99cf)
 
 [Assignment Instructions](docs/instructions.md)  
 [How to start coding](docs/how-to-use.md)  
