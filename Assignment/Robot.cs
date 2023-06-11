@@ -12,14 +12,16 @@ public class Robot
     public int NumCommands { get; }
 
     /// <summary>
-    /// Gets or sets the X-coordinate of the robot.
+    /// Gets or sets x coordinate
     /// </summary>
     private int _x;
+
+
     /// <summary>
-    /// Gets or sets the X coordinate of the robot's position.
+    /// Gets or sets the x coordinate
     /// </summary>
-    /// <value>The X coordinate value.</value>
-    /// <exception cref="InvalidOperationException">Thrown when the robot is not powered on.</exception>
+    /// <value>The x coordinate value.</value>
+    /// <exception cref="InvalidOperationException">when robot not powered on</exception>
     public int X
     {
         get { return _x; }
@@ -28,23 +30,23 @@ public class Robot
             if (IsPowered)
                 _x = value;
             else
-                throw new InvalidOperationException("Cannot move the robot when it is not powered on.");
+                throw new InvalidOperationException("Cannot move the robot when powered off");
         }
     }
     
     /// <summary>
-    /// Gets or sets the Y-coordinate of the robot.
+    /// Gets or sets the y coordinate
     /// </summary>
     /// <summary>
-    /// Represents the Y coordinate of the robot's position.
+    /// Represents the y coordinate
     /// </summary>
     private int _y;
 
     /// <summary>
-    /// Gets or sets the Y coordinate of the robot's position.
+    /// Gets or sets the y coordinate 
     /// </summary>
     /// <value>The Y coordinate value.</value>
-    /// <exception cref="InvalidOperationException">Thrown when the robot is not powered on.</exception>
+    /// <exception cref="InvalidOperationException">when robot powered off</exception>
     public int Y
     {
         get { return _y; }
@@ -53,12 +55,12 @@ public class Robot
             if (IsPowered)
                 _y = value;
             else
-                throw new InvalidOperationException("Cannot move the robot when it is not powered on.");
+                throw new InvalidOperationException("Cannot move the robot when it is off");
         }
     }
     
     /// <summary>
-    /// Gets or sets a value indicating whether the robot is powered on.
+    /// Gets or sets a value of power status
     /// </summary>
     public bool IsPowered { get; set; }
 
@@ -66,13 +68,14 @@ public class Robot
     // An array is not the preferred data structure here.
     // You will get bonus marks if you replace the array with the preferred data structure
     // Hint: It is NOT a list either,
+    //it can use a queue
     private readonly IRobotCommand[] _commands;
     private int _commandsLoaded = 0;
 
     /// <summary>
-    /// Returns a string that represents the current robot coordinates and power status.
+    /// current position and power status of robot is returned
     /// </summary>        
-    /// <returns>A string representation of the robot.</returns>
+    /// <returns>A string representation of the robot status</returns>
     public override string ToString()
     {
         return $"[{X} {Y} {IsPowered}]";
@@ -116,6 +119,6 @@ public class Robot
         if (_commandsLoaded >= NumCommands)
             return false;
         _commands[_commandsLoaded++] = command;
-        return true;
-    }
+        return true;
+    }
 }
